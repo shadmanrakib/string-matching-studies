@@ -1,3 +1,5 @@
+// from https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string-search_algorithm 
+
 use std::collections::HashMap;
 
 fn make_last_occurrences_table(pattern: &String) -> HashMap<char, usize> {
