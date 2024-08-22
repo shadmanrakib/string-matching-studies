@@ -1,8 +1,22 @@
+mod booth;
 mod boyer_moore;
 mod kmp;
 mod rabin_karp;
 
 fn main() {
+    booth_tests();
+    matching_tests();
+}
+
+fn booth_tests() {
+    // lexicographically minimal rotations
+    for (input, expected) in [("", ""), ("ppapple", "applepp"), ("aaaa", "aaaa"), ("aabbabsasba", "aaabbabsasb")] {
+        assert_eq!(booth::booth(input.to_string()), expected.to_string());
+    }
+    println!("Booth tests passed");
+}
+
+fn matching_tests() {
     for (text, pattern) in [
         ("", ""),
         ("", "a"),
@@ -102,8 +116,9 @@ fn main() {
         let bm_matches: Vec<usize> = boyer_moore::boyer_moore(text.clone(), pattern.clone());
         let rk_matches: Vec<usize> = rabin_karp::rabin_karp(text.clone(), pattern.clone());
 
-        println!("text: {text} \t pattern: {pattern}");
         assert_eq!(kmp_matches, bm_matches);
         assert_eq!(kmp_matches, rk_matches);
     }
+
+    println!("String matching tests passed");
 }
